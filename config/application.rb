@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -22,6 +23,7 @@ module RailsTakeHome
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
+    config.middleware.use Rack::MethodOverride
+    config.api_only = false
   end
 end
