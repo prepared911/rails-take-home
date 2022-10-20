@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_140554) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_013757) do
+  create_table "audits", force: :cascade do |t|
+    t.string "timestamp"
+    t.string "action"
+    t.string "data"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_audits_on_user_id"
+  end
+
   create_table "chat_messages", force: :cascade do |t|
     t.string "message", null: false
     t.integer "chatroom_id", null: false
@@ -43,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_140554) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "audits", "users"
   add_foreign_key "chat_messages", "chatrooms"
   add_foreign_key "chat_messages", "users"
   add_foreign_key "chatrooms", "nature_codes"
