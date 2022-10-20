@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_20_013757) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_020119) do
   create_table "audits", force: :cascade do |t|
     t.string "timestamp"
-    t.string "action"
-    t.string "data"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "variables"
+    t.string "raw"
     t.index ["user_id"], name: "index_audits_on_user_id"
   end
 
