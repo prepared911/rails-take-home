@@ -11,6 +11,9 @@ class GraphqlController < ApplicationController
     context = {
       current_user: current_user,
     }
+    
+    Audit.create!(timestamp: DateTime.now(), variables: variables, raw: query, user_id: context[:current_user].id)
+
     result = RailsTakeHomeSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
